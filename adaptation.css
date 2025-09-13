@@ -44,15 +44,15 @@
     }
 
     .posters img {
-        width: 22%;
-        margin: 0 10px;
+        width: 18%;
+        margin: 0 15px;
     }
 }
 
 /* --- Планшеты вертикально (до 768px) --- */
 @media (max-width: 768px) {
     header {
-        height: 90vh;
+        min-height: 90dvh; /* фикс для корректного отображения в Chrome/Firefox */
     }
 
     header .logo-img {
@@ -121,23 +121,35 @@
 /* --- Телефоны (до 480px) --- */
 @media (max-width: 480px) {
     header {
-        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* контент у нижнего края */
+        align-items: center;      /* центрируем по горизонтали */
+        text-align: center;
+        min-height: 90dvh; /* фикс для мобильных браузеров */
+        position: relative;
     }
 
     header .logo-img {
-        width: 200px;
-        top: 65%;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
+        width: 180px; /* размер лого на телефоне */
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-bottom: 8px; /* небольшой отступ до текста */
     }
 
     .info {
-        top: 85%;
-        left: 50%;
-        transform: translateX(-50%);
+        position: relative;
+        display: flex;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 8px;
-        font-size: 11px;
+        font-size: 12px;
+        margin-bottom: 15px; /* отступ от нижнего края */
+        top: auto;
+        left: auto;
+        transform: none;
     }
 
     /* Постер */
@@ -157,54 +169,42 @@
         margin: 25px auto;
     }
 
-    /* Манга */
+    /* Манга — горизонтальный скролл */
     .posters {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 15px;
-    padding-bottom: 10px;
-    scrollbar-width: thin;
-}
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 15px;
+        padding-bottom: 10px;
+        scrollbar-gutter: stable;
+        -webkit-overflow-scrolling: touch;
+    }
 
-.posters::-webkit-scrollbar {
-    height: 8px;
-}
+    .posters::-webkit-scrollbar {
+        height: 8px;
+    }
 
-.posters::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
+    .posters::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
 
-.posters::-webkit-scrollbar-track {
-    background: transparent;
-}
+    .posters::-webkit-scrollbar-track {
+        background: transparent;
+    }
 
     .posters img {
-    flex-shrink: 0;
-    width: 200px;
-    transition: transform 0.3s ease;
-}
-
+        flex-shrink: 0;
+        width: 200px;
+        transition: transform 0.3s ease;
+    }
 
     /* Подвал */
     .footer-social img {
         width: 25px;
         height: 25px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .posters img {
-        width: 18%;
-        margin: 0 15px;
-    }
-    
-    .scenes-grid {
-        margin-left: 5%;
-        max-width: 550px;
     }
 }
 
@@ -216,13 +216,13 @@
         justify-content: center;
         gap: 15px;
     }
-    
+
     .posters img {
         width: 22%;
         margin: 0;
         max-width: 150px;
     }
-    
+
     .scenes-grid {
         margin-left: 5%;
         grid-template-columns: repeat(3, 1fr);
@@ -236,12 +236,12 @@
     .posters {
         gap: 10px;
     }
-    
+
     .posters img {
         width: 20%;
         max-width: 130px;
     }
-    
+
     .scenes-grid {
         margin-left: 0;
         margin: 20px auto;
@@ -249,11 +249,11 @@
         max-width: 400px;
         gap: 6px;
     }
-    
+
     .scenes-grid img {
         transform-origin: center;
     }
-    
+
     .scenes-grid img:hover {
         transform: scale(1.03);
     }
@@ -264,12 +264,12 @@
     .posters {
         gap: 8px;
     }
-    
+
     .posters img {
         width: 22%;
         max-width: 110px;
     }
-    
+
     .scenes-grid {
         grid-template-columns: repeat(3, 1fr);
         max-width: 350px;
@@ -282,12 +282,12 @@
     .posters {
         gap: 5px;
     }
-    
+
     .posters img {
         width: 23%;
         max-width: 90px;
     }
-    
+
     .scenes-grid {
         grid-template-columns: repeat(3, 1fr);
         max-width: 300px;
@@ -301,53 +301,10 @@
         width: 18%;
         max-width: 120px;
     }
-    
+
     .scenes-grid {
         grid-template-columns: repeat(3, 1fr);
         max-width: 350px;
         gap: 6px;
     }
-}
-
-/* Гарантируем, что манга всегда в одном ряду */
-.posters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 10px 0;
-    -webkit-overflow-scrolling: touch;
-}
-
-.posters::-webkit-scrollbar {
-    height: 4px;
-}
-
-.posters::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-}
-
-.posters::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-}
-
-.posters::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
-/* Гарантируем, что сцены всегда в 3 колонки */
-.scenes-grid {
-    align-items: center;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-}
-
-/* Сохраняем пропорции изображений */
-.posters img,
-.scenes-grid img {
-    object-fit: cover;
-    height: auto;
 }
